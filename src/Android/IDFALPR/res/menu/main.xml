@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.idfalpr.MainActivity" >
+
+    <item
+        android:id="@+id/identify_menu_item"
+        android:title="RECOGNIZE_THIS"/>
+
+</menu>

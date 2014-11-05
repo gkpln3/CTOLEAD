@@ -24,3 +24,10 @@ proguard/
 
 # Log Files
 *.log
+
+#svn files
+*.svn
+
+#C/CPP build files
+*.o
+*.o.d
