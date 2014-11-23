@@ -31,3 +31,11 @@ proguard/
 #C/CPP build files
 *.o
 *.o.d
+
+SpyGlass/node_modules
+SpyGlass/public
+SpyGlass/.tmp
+SpyGlass/.idea
+SpyGlass/client/bower_components
+SpyGlass/dist
+SpyGlass/server/config/local.env.js

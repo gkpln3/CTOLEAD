@@ -1,0 +1,38 @@
+<div layout="column">
+  <div flex>
+    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+  </div>
+  <div flex="25">
+    <div>
+    <md-toolbar md-theme="red">
+      <h3 class="md-toolbar-tools">
+        <span>Alerts</span>
+      </h3>
+    </md-toolbar>
+    </div>
+    <div id="alerts">
+        <md-whiteframe ng-repeat="alert in alerts" class="md-whiteframe-z1" layout ng-hide="hide">
+          <div class="md-tile-content">
+            <div layout="column">
+              <div flex>
+                <div flex>
+                  <h1>{{alert.carId}}</h3>
+                </div>
+                <div flex>
+                  <h3>
+                    {{alert.date | date}}
+                  </h3>
+                </div>
+              </div>
+              <div layout-align="end end">
+                <md-button class="md-fab md-warn" aria-label="dismiss" ng-click="deleteAlert(alert)">
+                  X
+                </md-button>
+              </div>
+            </div>
+
+          </div>
+        </md-whiteframe>
+    </div>
+  </div>
+</div>
