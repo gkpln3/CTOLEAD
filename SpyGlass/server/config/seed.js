@@ -87,10 +87,12 @@ Car.find({}).remove(function() {
 Camera.find({}).remove(function() {
   Camera.create({
       _id:1,
-      location: 'Tel Aviv'
+      location: 'Tel Aviv',
+      coordinate:{latitude: 32.082723, longitude: 34.794685}
     }, {
       _id:2,
-      location: 'Holon'
+      location: 'Holon',
+      coordinate:{latitude: 32.022555, longitude: 34.778967}
     }, function() {
       console.log('finished populating cameras');
     }

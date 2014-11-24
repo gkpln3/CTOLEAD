@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var CameraSchema = new Schema({
   _id: Number,
-  coordinate: String,
+  coordinate: {latitude: String, longitude: String },
   location: String
 });
 

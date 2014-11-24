@@ -3,9 +3,13 @@
 angular.module('spyGlassApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'Home',
+      'title': 'Alerts',
       'link': '/'
-    }];
+    },
+      {
+        title: 'Search',
+        link: '/search'
+      }];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;

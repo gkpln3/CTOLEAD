@@ -23,7 +23,7 @@ exports.show = function(req, res) {
 // Creates a new alert in the DB.
 exports.create = function(req, res) {
   if(!req.body)
-    return res.json(500, {message: "No data entered"});
+    return res.json(422, {message: "No data entered"});
   Alert.create(req.body, function(err, alert) {
     if(err) { return handleError(res, err); }
     return res.json(201, alert);

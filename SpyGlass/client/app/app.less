@@ -3,6 +3,7 @@
 
 @icon-font-path: '/bower_components/bootstrap/fonts/';
 @fa-font-path: '/bower_components/font-awesome/fonts';
+@font: 'RobotoDraft';
 
 /**
  * App-wide Styles
@@ -15,9 +16,14 @@
     padding: 0.2em 0;
 }
 
+body{
+  font-family: @font;
+}
+
 // injector
 @import 'account/login/login.less';
 @import 'admin/admin.less';
 @import 'main/main.less';
+@import 'search/search.less';
 @import 'modal/modal.less';
 // endinjector
