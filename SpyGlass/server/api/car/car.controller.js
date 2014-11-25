@@ -13,7 +13,7 @@ exports.index = function(req, res) {
 
 // Get a single car
 exports.show = function(req, res) {
-  Car.find({carId : req.params.id}).where('date').gt(new Date(req.params.minDate)).lt(new Date(req.params.maxDate)).populate('camId').exec(function (err, car) {
+  Car.find({carId : req.params.id}).sort('-date').populate('camId').exec(function (err, car) {
     if(err) { return handleError(res, err); }
     if(!car) { return res.send(404); }
     return res.json(car);

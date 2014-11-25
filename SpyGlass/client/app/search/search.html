@@ -3,13 +3,6 @@
     <md-text-float label="מספר רכב" ng-model="carNum"></md-text-float>
     <md-button class="md-raised md-primary" ng-click="searchCar(carNum)" aria-label="search">Search</md-button>
   </md-content>
-  <div flex>
-      <div >
-        <ui-gmap-google-map center="map.center" zoom="map.zoom" control="map.control">
-          <ui-gmap-marker ng-repeat="car in cars" idKey="car._id" coords="car.camId.coordinate" options="{labelContent:moment(car.date).format('L HH:mm'), labelAnchor:'70 0', labelClass:'mapLabel'}">
-          </ui-gmap-marker>
-        </ui-gmap-google-map></div>
-  </div>
   <div flex style="margin-top:20px">
     <md-text-float flex offset="40" ng-model="field" label="סינון"></md-text-float>
     <table class="table table-bordered">

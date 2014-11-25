@@ -6,36 +6,19 @@ angular.module('spyGlassApp')
     $scope.moment = moment;
     $scope.carNum = '12-348-92';
 
-    var directionsDisplay = new google.maps.DirectionsRenderer();
+    $scope.open = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
 
-    $scope.searchCar = function(carNum)
-    {
-      $http.get('/api/cars/' + carNum + '/2014-11-20/2014-11-24').success(function(cars) {
+      $scope.opened = true;
+    };
+
+    $scope.format = 'dd/MM/yyyy';
+
+    $scope.searchCar = function(carNum) {
+      $http.get('/api/cars/' + carNum).success(function (cars) {
         $scope.cars = cars;
-        $scope.cars.forEach(function(car){
-          car.camId.fixCoord = car.camId.coordinate.latitude + ',' + car.camId.coordinate.longitude;
-        });
 
-        for(var i=0; i< cars.length-1;i++) {
-          drawDirections(cars[i].camId.fixCoord, cars[i+1].camId.fixCoord);
-        }
-        });
-    }
-
-    function drawDirections(source, destination)
-    {
-      directionsDisplay.setMap($scope.map.control.getGMap());
-      var directionsService = new google.maps.DirectionsService();
-
-      var request = {
-        origin: source,
-        destination: destination,
-        travelMode: google.maps.TravelMode.DRIVING
-      };
-      directionsService.route(request, function(response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-          directionsDisplay.setDirections(response);
-        }
       });
     }
   });

@@ -28,6 +28,7 @@
               <span>פרופיל חשוד</span>
             </div>
           </md-toolbar>
+          <img ng-src="{{selectedAlert.picture}}" class="face" alt="{{selectedAlert.name}}">
           <h1>שם החשוד: {{ selectedAlert.name }} </h1>
           <h2>מקושר ל:  {{ selectedAlert.associated }} </h2>
           <h3>{{ selectedAlert.description }}</h3>
