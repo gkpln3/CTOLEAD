@@ -42,14 +42,16 @@ angular.module('spyGlassApp')
         realAlert.alertPathDest.fixCoord = realAlert.alertPathDest.coordinate.latitude + ',' + realAlert.alertPathDest.coordinate.longitude;
         realAlert.usualPathSource.fixCoord = realAlert.usualPathSource.coordinate.latitude + ',' + realAlert.usualPathSource.coordinate.longitude;
         realAlert.usualPathDest.fixCoord = realAlert.usualPathDest.coordinate.latitude + ',' + realAlert.usualPathDest.coordinate.longitude;
-        drawDirections(realAlert.alertPathSource.fixCoord, realAlert.alertPathDest.fixCoord, $scope.excepMap);
-        drawDirections(realAlert.usualPathSource.fixCoord, realAlert.usualPathDest.fixCoord, $scope.usualMap);
+        drawDirections(realAlert.alertPathSource.fixCoord, realAlert.alertPathDest.fixCoord, $scope.excepMap, excepDisplay);
+        drawDirections(realAlert.usualPathSource.fixCoord, realAlert.usualPathDest.fixCoord, $scope.usualMap, usualDisplay);
       })
     }
 
-    function drawDirections(source, destination, map)
+    var excepDisplay = new google.maps.DirectionsRenderer();
+    var usualDisplay = new google.maps.DirectionsRenderer();
+
+    function drawDirections(source, destination, map, directionsDisplay)
     {
-      var directionsDisplay = new google.maps.DirectionsRenderer();
       directionsDisplay.setMap(map.control.getGMap());
       var directionsService = new google.maps.DirectionsService();
 
