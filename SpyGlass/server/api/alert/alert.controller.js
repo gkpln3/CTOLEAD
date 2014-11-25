@@ -5,7 +5,7 @@ var Alert = require('./alert.model');
 
 // Get list of alerts
 exports.index = function(req, res) {
-  Alert.find(function (err, alerts) {
+  Alert.find().populate('alertPathSource').populate('alertPathDest').exec(function (err, alerts) {
     if(err) { return handleError(res, err); }
     return res.json(200, alerts);
   });

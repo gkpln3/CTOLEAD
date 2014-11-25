@@ -113,10 +113,16 @@ Camera.find({}).remove(function() {
 Alert.find({}).remove(function() {
   Alert.create({
       carId:"12-348-92",
-      date: new Date(2014,10,23)
+      date: new Date(2014,10,23),
+      alertPathSource:1,
+      alertPathDest:2,
+      percentage: 3
     }, {
       carId:"12-348-93",
-      date: new Date(2014,10,22)
+      date: new Date(2014,10,22),
+      alertPathSource:1,
+      alertPathDest:3,
+      percentage: 5
     }, function() {
       console.log('finished populating alerts');
     }

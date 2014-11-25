@@ -6,12 +6,20 @@
     </md-tabs>
     <div ng-switch on="selectedIndex" class="tabpanel-container">
       <div id="map-content" role="tabpanel" aria-labelledby="mapTab" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
-        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+        <ui-gmap-google-map center='map.center' zoom='map.zoom' control="map.control">
+          <ui-gmap-marker idKey="selectedAlert.alertPathSource.location" coords="selectedAlert.alertPathSource.coordinate">
+          </ui-gmap-marker>
+          <ui-gmap-marker idKey="selectedAlert.alertPathDest.location" coords="selectedAlert.alertPathDest.coordinate">
+          </ui-gmap-marker>
+        </ui-gmap-google-map>
       </div>
       <div id="detail-content" role="tabpanel" aria-labelledby="detailTab" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
         <md-content class="md-padding" style="height: 600px;">
           <h1>Car Number: {{ selectedAlert.carId }}</h1>
           <h2>Date: {{ selectedAlert.date | date }}</h2>
+          <h2>From: {{ selectedAlert.alertPathSource.location }}</h2>
+          <h2>To: {{ selectedAlert.alertPathDest.location }}</h2>
+          <h2>Road Percentage: {{ selectedAlert.percentage }}%</h2>
         </md-content>
       </div>
     </div ng-switch>

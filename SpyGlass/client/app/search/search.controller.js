@@ -17,8 +17,6 @@ angular.module('spyGlassApp')
         });
 
         for(var i=0; i< cars.length-1;i++) {
-          console.log(cars[i].camId.fixCoord);
-          console.log(cars[i+1].camId.fixCoord);
           drawDirections(cars[i].camId.fixCoord, cars[i+1].camId.fixCoord);
         }
         });
