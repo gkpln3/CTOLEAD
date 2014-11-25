@@ -6,13 +6,26 @@
     </md-tabs>
     <div ng-switch on="selectedIndex" class="tabpanel-container">
       <div id="map-content" role="tabpanel" aria-labelledby="mapTab" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
-        <ui-gmap-google-map center='map.center' zoom='map.zoom' control="map.control">
-          <ui-gmap-marker idKey="selectedAlert.alertPathSource.location" coords="selectedAlert.alertPathSource.coordinate">
-          </ui-gmap-marker>
-          <ui-gmap-marker idKey="selectedAlert.alertPathDest.location" coords="selectedAlert.alertPathDest.coordinate">
-          </ui-gmap-marker>
-        </ui-gmap-google-map>
+        <div class="mapDiv">
+          <h3>נתיב אופייני</h3>
+          <ui-gmap-google-map center='usualMap.center' zoom='usualMap.zoom' control="usualMap.control">
+            <ui-gmap-marker idKey="selectedAlert.alertPathSource.location" coords="selectedAlert.alertPathSource.coordinate">
+            </ui-gmap-marker>
+            <ui-gmap-marker idKey="selectedAlert.alertPathDest.location" coords="selectedAlert.alertPathDest.coordinate">
+            </ui-gmap-marker>
+          </ui-gmap-google-map>
+        </div>
+        <div class="mapDiv">
+          <h3>נתיב חשוד</h3>
+          <ui-gmap-google-map center='excepMap.center' zoom='excepMap.zoom' control="excepMap.control">
+            <ui-gmap-marker idKey="selectedAlert.usualPathSource.location" coords="selectedAlert.usualPathSource.coordinate">
+            </ui-gmap-marker>
+            <ui-gmap-marker idKey="selectedAlert.usualPathDest.location" coords="selectedAlert.usualPathDest.coordinate">
+            </ui-gmap-marker>
+          </ui-gmap-google-map>
+        </div>
       </div>
+
       <div id="detail-content" role="tabpanel" aria-labelledby="detailTab" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
         <md-content class="md-padding" style="height: 600px; text-align:right">
           <md-toolbar class="md-flex" md-theme="red" style="text-align: right">

@@ -1,4 +1,5 @@
 @height: 500px;
+@mapwidth: 400px;
 
 #banner {
     border-bottom: none;
@@ -36,7 +37,7 @@
     width: 30px;
   }
 }
-.angular-google-map-container { height: @height; }
+.angular-google-map-container { height: @height; width:@mapwidth }
 
 .tabpanel-container {
   display: block;
@@ -78,4 +79,8 @@ md-toolbar{
   text-align:center;
 }
 
-
+.mapDiv{
+  margin-left:5%;
+  display:inline-block;
+  text-align: right;
+}

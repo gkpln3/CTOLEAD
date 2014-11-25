@@ -3,7 +3,8 @@
 angular.module('spyGlassApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
     $scope.awesomeThings = [];
-    $scope.map = { center: { latitude: 32.088950, longitude: 34.783170 }, zoom: 8, control:{} };
+    $scope.usualMap = { center: { latitude: 32.088950, longitude: 34.783170 }, zoom: 8, control:{} };
+    $scope.excepMap = { center: { latitude: 32.088950, longitude: 34.783170 }, zoom: 8, control:{} };
     $http.get('/api/alerts').success(function(alerts) {
       $scope.alerts = alerts;
       socket.syncUpdates('alert', $scope.alerts);
@@ -33,21 +34,23 @@ angular.module('spyGlassApp')
 
     $scope.selectedIndex = 0;
 
-    var directionsDisplay = new google.maps.DirectionsRenderer();
-
     $scope.selectAlert= function(alert)
     {
       $http.get('/api/alerts/' + alert._id).success(function(realAlert){
         $scope.selectedAlert = realAlert;
         realAlert.alertPathSource.fixCoord = realAlert.alertPathSource.coordinate.latitude + ',' + realAlert.alertPathSource.coordinate.longitude;
         realAlert.alertPathDest.fixCoord = realAlert.alertPathDest.coordinate.latitude + ',' + realAlert.alertPathDest.coordinate.longitude;
-        drawDirections(realAlert.alertPathSource.fixCoord, realAlert.alertPathDest.fixCoord);
+        realAlert.usualPathSource.fixCoord = realAlert.usualPathSource.coordinate.latitude + ',' + realAlert.usualPathSource.coordinate.longitude;
+        realAlert.usualPathDest.fixCoord = realAlert.usualPathDest.coordinate.latitude + ',' + realAlert.usualPathDest.coordinate.longitude;
+        drawDirections(realAlert.alertPathSource.fixCoord, realAlert.alertPathDest.fixCoord, $scope.excepMap);
+        drawDirections(realAlert.usualPathSource.fixCoord, realAlert.usualPathDest.fixCoord, $scope.usualMap);
       })
     }
 
-    function drawDirections(source, destination)
+    function drawDirections(source, destination, map)
     {
-      directionsDisplay.setMap($scope.map.control.getGMap());
+      var directionsDisplay = new google.maps.DirectionsRenderer();
+      directionsDisplay.setMap(map.control.getGMap());
       var directionsService = new google.maps.DirectionsService();
 
       var request = {
