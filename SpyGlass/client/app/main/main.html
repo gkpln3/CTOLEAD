@@ -2,7 +2,7 @@
   <div flex>
     <md-tabs selected="selectedIndex">
       <md-tab id="mapTab" aria-controls="map-content" label="Map"> </md-tab>
-      <md-tab id="detailTab" aria-controls="detail-content" label="Details"> </md-tab>
+      <md-tab id="detailTab" aria-controls="detail-content" label="Details" ng-disabled="!selectedAlert"> </md-tab>
     </md-tabs>
     <div ng-switch on="selectedIndex" class="tabpanel-container">
       <div id="map-content" role="tabpanel" aria-labelledby="mapTab" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
@@ -14,12 +14,23 @@
         </ui-gmap-google-map>
       </div>
       <div id="detail-content" role="tabpanel" aria-labelledby="detailTab" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
-        <md-content class="md-padding" style="height: 600px;">
-          <h1>Car Number: {{ selectedAlert.carId }}</h1>
-          <h2>Date: {{ selectedAlert.date | date }}</h2>
-          <h2>From: {{ selectedAlert.alertPathSource.location }}</h2>
-          <h2>To: {{ selectedAlert.alertPathDest.location }}</h2>
-          <h2 style="color:red">Surprise probability: {{ 100 - selectedAlert.percentage }}%</h2>
+        <md-content class="md-padding" style="height: 600px; text-align:right">
+          <md-toolbar class="md-flex" md-theme="red" style="text-align: right">
+            <div style="margin:20px">
+              <span>תיאור המקרה</span>
+            </div>
+          </md-toolbar>
+          <h3>המערכת זיהתה חריגה בתאריך {{ selectedAlert.date | date : 'dd/MM/yyyy' }} במסלול הנסיעה של {{ selectedAlert.name }}</h3>
+          <h3>{{ selectedAlert.name }} נסע ברכב מספר {{ selectedAlert.carId }} מ{{ selectedAlert.alertPathSource.location }} ל{{ selectedAlert.alertPathDest.location }} כאשר בדרך כלל הוא נוסע מ{{ selectedAlert.usualPathSource.location }} ל{{ selectedAlert.usualPathDest.location }}</h3>
+          <h3 style="color:red">לפי ניתוח המערכת ישנה סבירות של  {{ 100 - selectedAlert.percentage }}% שמדובר בפעילות חבלנית עוינת</h3>
+          <md-toolbar class="md-flex" md-theme="purple" style="text-align: right">
+            <div style="margin:20px">
+              <span>פרופיל חשוד</span>
+            </div>
+          </md-toolbar>
+          <h1>שם החשוד: {{ selectedAlert.name }} </h1>
+          <h2>מקושר ל:  {{ selectedAlert.associated }} </h2>
+          <h3>{{ selectedAlert.description }}</h3>
         </md-content>
       </div>
     </div ng-switch>

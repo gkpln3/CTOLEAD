@@ -7,7 +7,6 @@ angular.module('spyGlassApp')
     $http.get('/api/alerts').success(function(alerts) {
       $scope.alerts = alerts;
       socket.syncUpdates('alert', $scope.alerts);
-      $scope.selectedAlert = alerts[0];
     });
 
     $scope.deleteAlert = function(alert) {
@@ -38,10 +37,12 @@ angular.module('spyGlassApp')
 
     $scope.selectAlert= function(alert)
     {
-      $scope.selectedAlert = alert;
-      alert.alertPathSource.fixCoord = alert.alertPathSource.coordinate.latitude + ',' + alert.alertPathSource.coordinate.longitude;
-      alert.alertPathDest.fixCoord = alert.alertPathDest.coordinate.latitude + ',' + alert.alertPathDest.coordinate.longitude;
-      drawDirections(alert.alertPathSource.fixCoord, alert.alertPathDest.fixCoord);
+      $http.get('/api/alerts/' + alert._id).success(function(realAlert){
+        $scope.selectedAlert = realAlert;
+        realAlert.alertPathSource.fixCoord = realAlert.alertPathSource.coordinate.latitude + ',' + realAlert.alertPathSource.coordinate.longitude;
+        realAlert.alertPathDest.fixCoord = realAlert.alertPathDest.coordinate.latitude + ',' + realAlert.alertPathDest.coordinate.longitude;
+        drawDirections(realAlert.alertPathSource.fixCoord, realAlert.alertPathDest.fixCoord);
+      })
     }
 
     function drawDirections(source, destination)
