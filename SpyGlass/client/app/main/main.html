@@ -25,7 +25,7 @@
     </md-toolbar>
     </div>
     <div id="alerts">
-        <md-button ng-repeat="alert in alerts" md-swipe-left="deleteAlert(alert)" class="md-whiteframe-z1" ng-click="selectAlert(alert)" layout ng-hide="hide">
+        <md-button ng-repeat="alert in alerts" md-swipe-left="deleteAlert(alert)" class="md-whiteframe-z1" aria-label="alert" ng-click="selectAlert(alert)" layout ng-hide="hide">
           <div class="md-tile-content">
             <div layout="column">
               <div flex>

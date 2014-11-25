@@ -5,20 +5,14 @@
   </md-content>
   <div flex>
       <div >
-        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-          <ui-gmap-marker ng-repeat="car in cars" idKey="car._id" coords="car.camId.coordinate">
-          </ui-gmap-marker>
-          <ui-gmap-marker idKey="1" coords="{'type':'Point', 'coordinates':[32.088950, 34.783170]}">
-
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" control="map.control">
+          <ui-gmap-marker ng-repeat="car in cars" idKey="car._id" coords="car.camId.coordinate" options="{labelContent:moment(car.date).format('L HH:mm'), labelAnchor:'70 0', labelClass:'mapLabel'}">
           </ui-gmap-marker>
         </ui-gmap-google-map></div>
   </div>
   <div flex style="margin-top:20px">
     <table class="table table-bordered">
       <thead>
-        <td>
-          Car Id
-        </td>
         <td>
           Date
         </td>
@@ -31,7 +25,6 @@
       </thead>
       <tbody>
         <tr ng-repeat="car in cars">
-          <td>{{car.carId}}</td>
           <td>{{car.date | date }}</td>
           <td>{{car.camId.location}}</td>
           <td>Lat: {{car.camId.coordinate.latitude}}<br> Lon: {{car.camId.coordinate.longitude}}</td>

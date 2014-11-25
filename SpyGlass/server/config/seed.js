@@ -68,6 +68,13 @@ Car.find({}).remove(function() {
         date: new Date(2014,10,22)
       },
       {
+        carId: "12-348-92",
+        color: "Blue",
+        suspicious: true,
+        camId: 3,
+        date: new Date(2014,10,21)
+      },
+      {
         carId: "12-348-93",
         color: "Red",
         suspicious: true,
@@ -93,6 +100,10 @@ Camera.find({}).remove(function() {
       _id:2,
       location: 'Holon',
       coordinate:{latitude: 32.022555, longitude: 34.778967}
+    }, {
+      _id:3,
+      location: 'Petah Tikva',
+      coordinate:{latitude: 32.093148, longitude: 34.866696}
     }, function() {
       console.log('finished populating cameras');
     }
