@@ -19,12 +19,12 @@
           <h2>Date: {{ selectedAlert.date | date }}</h2>
           <h2>From: {{ selectedAlert.alertPathSource.location }}</h2>
           <h2>To: {{ selectedAlert.alertPathDest.location }}</h2>
-          <h2>Road Percentage: {{ selectedAlert.percentage }}%</h2>
+          <h2 style="color:red">Surprise probability: {{ 100 - selectedAlert.percentage }}%</h2>
         </md-content>
       </div>
     </div ng-switch>
   </div>
-  <div flex="20">
+  <div flex="25">
     <div>
     <md-toolbar md-theme="red">
       <h3 class="md-toolbar-tools">
@@ -46,9 +46,12 @@
                   </h3>
                 </div>
               </div>
-              <div layout-align="end end">
+              <div>
                 <md-button class="md-fab md-warn small-button" ng-click="deleteAlert(alert)" aria-label="dismiss">
-                  X
+                  <span class="glyphicon glyphicon-remove"></span>
+                </md-button>
+                <md-button class="md-fab md-warn small-button" ng-hide="alert.pushed" ng-click="pushAlert(alert)" aria-label="dismiss">
+                  <span class="glyphicon glyphicon-share-alt"></span>
                 </md-button>
               </div>
             </div>

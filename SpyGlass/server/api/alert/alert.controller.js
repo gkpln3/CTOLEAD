@@ -11,6 +11,13 @@ exports.index = function(req, res) {
   });
 };
 
+exports.pushed = function(req,res){
+  Alert.find({pushed: true}).populate('alertPathSource').populate('alertPathDest').populate('usualPathSource').populate('usualPathDest').exec(function (err, alerts) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, alerts);
+  });
+}
+
 // Get a single alert
 exports.show = function(req, res) {
   Alert.findById(req.params.id, function (err, alert) {
@@ -34,10 +41,7 @@ exports.create = function(req, res) {
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   Alert.findById(req.params.id, function (err, alert) {
-    if (err) { return handleError(res, err); }
-    if(!alert) { return res.send(404); }
-    var updated = _.merge(alert, req.body);
-    updated.save(function (err) {
+    Alert.update({_id : req.params.id}, {pushed:true}, function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, alert);
     });

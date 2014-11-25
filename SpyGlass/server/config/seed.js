@@ -10,6 +10,7 @@ var User = require('../api/user/user.model');
 var Car = require('../api/car/car.model');
 var Camera = require('../api/camera/camera.model');
 var Alert = require('../api/alert/alert.model');
+var Person = require('../api/person/person.model');
 
 Thing.find({}).remove(function() {
   Thing.create({
@@ -125,6 +126,36 @@ Alert.find({}).remove(function() {
       percentage: 5
     }, function() {
       console.log('finished populating alerts');
+    }
+  );
+});
+
+Person.find({}).remove(function() {
+  Person.create({
+      name: "מרואן קוואסמה",
+      associated: "חמאס, עמר אבו-עיישה, חמולת קוואסמה",
+      picture: "http://www.haaretz.co.il/polopoly_fs/1.2360425.1403801662!/image/3934528164.jpg_gen/derivatives/landscape_157/3934528164.jpg",
+      description: "חבר בחמולת קוואסמה. היה חלק מחוליית המחבלים שביצעה את החטיפה של גיל-עד מיכאל שער, נפתלי יעקב פרנקל ואיל יפרח. מרואן גר בחברון"
+    },
+    {
+      name: "עמר אבו-עיישה",
+      associated: "חמאס, מרואן קוואסמה",
+      picture: "http://www.haaretz.co.il/polopoly_fs/1.2360426.1403803107!/image/3165438367.jpg_gen/derivatives/landscape_157/3165438367.jpg",
+      description: "חלק מחולית המחבלים שביצעה את החטיפה לפני מבצע שובו אחים. פעיל חמאס מוכר לכוחות המערכת ונחשב למסוכן. מתגורר ופועל באזור חברון"
+    },
+    {
+      name: "בני סלע",
+      associated: "",
+      picture: "http://msc.wcdn.co.il/w/w-700/270845-5.jpg",
+      description: "אנס מורשע שנחשב מסוכן מאוד לציבור. בעל היסטוריה של בריחה ממתקני כליאה של השבס. יש לטפל בזהירות מירבית"
+  },
+  {
+    name: "אחמד יאסין",
+    associated: "חמאס",
+    picture: "http://upload.wikimedia.org/wikipedia/he/e/ee/Ahmed_Yassin.JPG",
+    description: "אחמד איסמעיל חסן יאסין (בערבית: أحمد ياسين; 1 בינואר 1937 – 22 במרץ 2004) היה מייסדו ומנהיגו של ארגון חמאס, והעניק ביסוס תאולוגי וחותם דתי לטרור. כונה השייח יאסין על שום מעמדו כמנהיג תנועת חמאס. נהרג בסיכול ממוקד שביצע בו צהל במהלך האינתיפאדה השנייה."
+  }, function() {
+      console.log('finished populating persons');
     }
   );
 });

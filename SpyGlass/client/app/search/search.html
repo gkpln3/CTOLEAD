@@ -11,6 +11,7 @@
         </ui-gmap-google-map></div>
   </div>
   <div flex style="margin-top:20px">
+    <md-text-float flex offset="40" ng-model="field" label="Filter"></md-text-float>
     <table class="table table-bordered">
       <thead>
         <td>
@@ -24,7 +25,7 @@
         </td>
       </thead>
       <tbody>
-        <tr ng-repeat="car in cars">
+        <tr ng-repeat="car in cars | filter:field">
           <td>{{car.date | date }}</td>
           <td>{{car.camId.location}}</td>
           <td>Lat: {{car.camId.coordinate.latitude}}<br> Lon: {{car.camId.coordinate.longitude}}</td>

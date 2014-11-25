@@ -14,6 +14,12 @@ angular.module('spyGlassApp')
       $http.delete('/api/alerts/' + alert._id);
     };
 
+    $scope.pushAlert = function(alert) {
+      $http.put('/api/alerts/' + alert._id).success(function(data) {
+          alert.pushed = true;
+        });
+    };
+
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
