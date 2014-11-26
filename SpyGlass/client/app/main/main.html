@@ -1,0 +1,87 @@
+<div layout="column" md-theme="indigo">
+  <div flex>
+    <md-tabs selected="selectedIndex">
+      <md-tab id="mapTab" aria-controls="map-content" label="מפה"> </md-tab>
+      <md-tab id="detailTab" aria-controls="detail-content" label="פרטים" ng-disabled="!selectedAlert"> </md-tab>
+    </md-tabs>
+    <div ng-switch on="selectedIndex" class="tabpanel-container">
+      <div id="map-content" role="tabpanel" aria-labelledby="mapTab" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
+        <div class="mapDiv">
+          <h3>נתיב אופייני</h3>
+          <ui-gmap-google-map center='usualMap.center' zoom='usualMap.zoom' control="usualMap.control">
+            <ui-gmap-marker idKey="selectedAlert.alertPathSource.location" coords="selectedAlert.alertPathSource.coordinate">
+            </ui-gmap-marker>
+            <ui-gmap-marker idKey="selectedAlert.alertPathDest.location" coords="selectedAlert.alertPathDest.coordinate">
+            </ui-gmap-marker>
+          </ui-gmap-google-map>
+        </div>
+        <div class="mapDiv">
+          <h3>נתיב חשוד</h3>
+          <ui-gmap-google-map center='excepMap.center' zoom='excepMap.zoom' control="excepMap.control">
+            <ui-gmap-marker idKey="selectedAlert.usualPathSource.location" coords="selectedAlert.usualPathSource.coordinate">
+            </ui-gmap-marker>
+            <ui-gmap-marker idKey="selectedAlert.usualPathDest.location" coords="selectedAlert.usualPathDest.coordinate">
+            </ui-gmap-marker>
+          </ui-gmap-google-map>
+        </div>
+      </div>
+
+      <div id="detail-content" role="tabpanel" aria-labelledby="detailTab" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
+        <md-content class="md-padding" style="height: 600px; text-align:right">
+          <md-toolbar class="md-flex" md-theme="red" style="text-align: right">
+            <div style="margin:20px">
+              <span>תיאור המקרה</span>
+            </div>
+          </md-toolbar>
+          <h3>המערכת זיהתה חריגה בתאריך {{ selectedAlert.date | date : 'dd/MM/yyyy' }} במסלול הנסיעה של {{ selectedAlert.name }}</h3>
+          <h3>{{ selectedAlert.name }} נסע ברכב מספר {{ selectedAlert.carId }} מ{{ selectedAlert.alertPathSource.location }} ל{{ selectedAlert.alertPathDest.location }} כאשר בדרך כלל הוא נוסע מ{{ selectedAlert.usualPathSource.location }} ל{{ selectedAlert.usualPathDest.location }}</h3>
+          <h3 style="color:red">לפי ניתוח המערכת ישנה סבירות של  {{ 100 - selectedAlert.percentage }}% שמדובר בפעילות חבלנית עוינת</h3>
+          <md-toolbar class="md-flex" md-theme="purple" style="text-align: right">
+            <div style="margin:20px">
+              <span>פרופיל חשוד</span>
+            </div>
+          </md-toolbar>
+          <img ng-src="{{selectedAlert.picture}}" class="face" alt="{{selectedAlert.name}}">
+          <h1>שם החשוד: {{ selectedAlert.name }} </h1>
+          <h2>מקושר ל:  {{ selectedAlert.associated }} </h2>
+          <h3>{{ selectedAlert.description }}</h3>
+        </md-content>
+      </div>
+    </div ng-switch>
+  </div>
+  <div flex="25">
+    <div>
+    <md-toolbar md-theme="red">
+      <h3 class="md-toolbar-tools">
+        <span flex>התראות</span>
+      </h3>
+    </md-toolbar>
+    </div>
+    <div id="alerts">
+        <md-button ng-repeat="alert in alerts" md-swipe-left="deleteAlert(alert)" class="md-whiteframe-z1" aria-label="alert" ng-click="selectAlert(alert)" layout ng-hide="hide">
+          <div class="md-tile-content">
+            <div layout="column">
+              <div flex>
+                <div flex>
+                  <h1>{{alert.carId}}</h3>
+                </div>
+                <div flex>
+                  <h3>
+                    {{alert.date | date:'dd-MM-yyyy HH:mm:ss'}}
+                  </h3>
+                </div>
+              </div>
+              <div>
+                <md-button class="md-fab md-warn small-button" ng-click="deleteAlert(alert)" aria-label="dismiss">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </md-button>
+                <md-button class="md-fab md-warn small-button" ng-hide="alert.pushed" ng-click="pushAlert(alert)" aria-label="dismiss">
+                  <span class="glyphicon glyphicon-share-alt"></span>
+                </md-button>
+              </div>
+            </div>
+          </div>
+        </md-button>
+    </div>
+  </div>
+</div>

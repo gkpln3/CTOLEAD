@@ -1,0 +1,44 @@
+<div md-layout="row">
+  <md-content md-layout="row" flex offset="30">
+    <select class="form-control" ng-model="location" ng-options="camera.location for camera in cameras"></select>
+    <input type="date" ng-model="minDate" class="form-control" style="width:auto"/><span>-</span>
+    <input type="date" ng-model="maxDate" class="form-control" style="width:auto"/>
+    <button type="button" class="btn btn-primary" ng-click="searchLocation()">Search</button>
+  </md-content>
+  <md-text-float flex offset="40" label="סינון" ng-model="field"></md-text-float>
+  <div layout="column" style="margin-top:20px;" class="table-responsive">
+    <div flex="35" offset="10">
+      <ui-gmap-google-map center='map.center' zoom='map.zoom' control="map.control">
+        <ui-gmap-marker idKey="location.location" coords="location.coordinate">
+        </ui-gmap-marker>
+      </ui-gmap-google-map>
+    </div>
+    <div flex offset="10" style="margin-right: 50px; text-align: right">
+      <table class="table table-bordered">
+        <thead>
+        <td>
+          תאריך מיקום המשך
+        </td>
+        <td>
+          המשיך למיקום
+        </td>
+        <td>
+          לוחית רישוי
+        </td>
+        <td>
+          תאריך
+        </td>
+        </thead>
+        <tbody>
+        <tr ng-repeat="car in cars | filter:field">
+          <td>{{ car.nextLocation.date ? (car.nextLocation.date | date:'dd-MM-yyyy HH:mm:ss') : 'לא ידוע' }} </td>
+          <td>{{ car.nextLocation.location.location ? car.nextLocation.location.location : 'לא ידוע' }} </td>
+          <td>{{ car.carId }} </td>
+          <td>{{car.date | date:'dd-MM-yyyy HH:mm:ss'  }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
