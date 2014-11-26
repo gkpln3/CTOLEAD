@@ -13,6 +13,10 @@ angular.module('spyGlassApp')
     $scope.deleteAlert = function(alert) {
       $http.delete('/api/alerts/' + alert._id);
       $scope.selectedAlert = null;
+      // Clear the map
+      usualDisplay.setDirections({routes:[]});
+      excepDisplay.setDirections({routes:[]});
+      $scope.selectedIndex = 0;
     };
 
     $scope.pushAlert = function(alert) {

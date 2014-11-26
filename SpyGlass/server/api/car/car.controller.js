@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Car = require('./car.model');
+var Camera = require('../camera/camera.model');
+var async = require('../../../node_modules/async/lib/async');
 
 // Get list of cars
 exports.index = function(req, res) {
@@ -11,6 +13,38 @@ exports.index = function(req, res) {
   });
 };
 
+// Get list of cameras
+exports.getCameras = function(req, res) {
+  Camera.find(function (err, cars) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, cars);
+  });
+};
+
+function getCarNextLocation(car, callback){
+  Car.find({carId: car.carId}).where('date').gt(car.date).sort('date').limit(1).populate('camId').exec(function(err, nextCar){
+    if(err) { return handleError(res, err); }
+    var newCar = car;
+    if(nextCar[0]){
+      console.log(nextCar[0]);
+      newCar._doc.nextLocation = {location: nextCar[0].camId, date: nextCar[0].date};
+      console.log(newCar);
+    }
+    callback(null,newCar);
+  })
+}
+
+// Get cars that passed through a location
+exports.getByLocation = function(req, res) {
+  Car.find({camId: req.params.locationId}).where('date').gt(new Date(req.params.minDate)).lt(new Date(req.params.maxDate)).sort('-date').populate('camId').exec(function (err, cars) {
+    if(err) { return handleError(res, err); }
+    if(!cars) { return res.send(404); }
+    async.concat(cars, getCarNextLocation, function(err, locations){
+      if(err) { return handleError(res, err); }
+      return res.json(locations);
+    })
+  });
+};
 // Get a single car
 exports.show = function(req, res) {
   Car.find({carId : req.params.id}).where('date').gt(new Date(req.params.minDate)).lt(new Date(req.params.maxDate)).sort('-date').populate('camId').exec(function (err, car) {

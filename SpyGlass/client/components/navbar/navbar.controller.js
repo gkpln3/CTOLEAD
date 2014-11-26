@@ -3,12 +3,16 @@
 angular.module('spyGlassApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'Alerts',
+      'title': 'התרעות',
       'link': '/'
     },
       {
-        title: 'Search',
+        title: 'חיפוש לפי מספר',
         link: '/search'
+      },
+      {
+        title: 'חיפוש לפי מיקום',
+        link: '/location'
       }];
 
     $scope.isCollapsed = true;
