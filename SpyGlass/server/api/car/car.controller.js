@@ -24,10 +24,10 @@ exports.getCameras = function(req, res) {
 function getCarNextLocation(car, callback){
   Car.find({carId: car.carId}).where('date').gt(car.date).sort('date').limit(1).populate('camId').exec(function(err, nextCar){
     if(err) { return handleError(res, err); }
-    var newCar = car;
+    var newCar = car._doc;
     if(nextCar[0]){
       console.log(nextCar[0]);
-      newCar._doc.nextLocation = {location: nextCar[0].camId, date: nextCar[0].date};
+      newCar.nextLocation = {location: nextCar[0].camId, date: nextCar[0].date};
       console.log(newCar);
     }
     callback(null,newCar);
