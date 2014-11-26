@@ -23,9 +23,11 @@
               <span>תיאור המקרה</span>
             </div>
           </md-toolbar>
+          <div class="bs-callout bs-callout-danger">
           <h3>המערכת זיהתה חריגה בתאריך {{ selectedAlert.date | date : 'dd/MM/yyyy' }} במסלול הנסיעה של {{ selectedAlert.name }}</h3>
           <h3>{{ selectedAlert.name }} נסע ברכב מספר {{ selectedAlert.carId }} מ{{ selectedAlert.alertPathSource.location }} ל{{ selectedAlert.alertPathDest.location }} כאשר בדרך כלל הוא נוסע מ{{ selectedAlert.usualPathSource.location }} ל{{ selectedAlert.usualPathDest.location }}</h3>
           <h3 style="color:red">לפי ניתוח המערכת ישנה סבירות של  {{ 100 - selectedAlert.percentage }}% שמדובר בפעילות חבלנית עוינת</h3>
+          </div>
           <md-toolbar class="md-flex" md-theme="purple" style="text-align: right">
             <div style="margin:20px">
               <span>פרופיל חשוד</span>
