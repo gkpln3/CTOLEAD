@@ -1,10 +1,13 @@
 <div md-layout="row">
-  <md-content md-layout="row" flex offset="40">
-    <md-text-float label="מספר רכב" ng-model="carNum"></md-text-float>
-    <md-button class="md-raised md-primary" ng-click="searchCar(carNum)" aria-label="search">Search</md-button>
+  <md-content md-layout="row" flex offset="25">
+    <md-text-float label="מספר רכב"  ng-model="carNum" style="display: inline-block; text-align: right"></md-text-float>
+    <input type="date" ng-model="minDate" class="form-control" style="width:auto"/><span>-</span>
+    <input type="date" ng-model="maxDate" class="form-control" style="width:auto"/>
+    <!--<md-button class="md-raised md-primary" ng-click="searchCar(carNum)" aria-label="search">Search</md-button>-->
+    <button type="button" class="btn btn-primary" ng-click="searchCar(carNum)">Search</button>
   </md-content>
   <div flex style="margin-top:20px">
-    <md-text-float flex offset="40" ng-model="field" label="סינון"></md-text-float>
+    <md-text-float flex offset="40" label="סינון" ng-model="field"></md-text-float>
     <table class="table table-bordered">
       <thead>
         <td>

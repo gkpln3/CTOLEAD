@@ -12,6 +12,7 @@ angular.module('spyGlassApp')
 
     $scope.deleteAlert = function(alert) {
       $http.delete('/api/alerts/' + alert._id);
+      $scope.selectedAlert = null;
     };
 
     $scope.pushAlert = function(alert) {

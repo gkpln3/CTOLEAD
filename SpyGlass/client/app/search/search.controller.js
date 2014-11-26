@@ -13,10 +13,11 @@ angular.module('spyGlassApp')
       $scope.opened = true;
     };
 
-    $scope.format = 'dd/MM/yyyy';
+    $scope.minDate = new Date();
+    $scope.maxDate = new Date();
 
     $scope.searchCar = function(carNum) {
-      $http.get('/api/cars/' + carNum).success(function (cars) {
+      $http.get('/api/cars/' + carNum + '/' + $scope.minDate.toString() + '/' + $scope.maxDate.toString()).success(function (cars) {
         $scope.cars = cars;
 
       });
