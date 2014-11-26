@@ -3,7 +3,7 @@
 angular.module('spyGlassApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'התרעות',
+      'title': 'התראות',
       'link': '/'
     },
       {

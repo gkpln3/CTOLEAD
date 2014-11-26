@@ -8,21 +8,11 @@
       <div id="map-content" role="tabpanel" aria-labelledby="mapTab" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
         <div class="mapDiv">
           <h3>נתיב אופייני</h3>
-          <ui-gmap-google-map center='usualMap.center' zoom='usualMap.zoom' control="usualMap.control">
-            <ui-gmap-marker idKey="selectedAlert.alertPathSource.location" coords="selectedAlert.alertPathSource.coordinate">
-            </ui-gmap-marker>
-            <ui-gmap-marker idKey="selectedAlert.alertPathDest.location" coords="selectedAlert.alertPathDest.coordinate">
-            </ui-gmap-marker>
-          </ui-gmap-google-map>
+          <ui-gmap-google-map center='usualMap.center' zoom='usualMap.zoom' control="usualMap.control"></ui-gmap-google-map>
         </div>
         <div class="mapDiv">
           <h3>נתיב חשוד</h3>
-          <ui-gmap-google-map center='excepMap.center' zoom='excepMap.zoom' control="excepMap.control">
-            <ui-gmap-marker idKey="selectedAlert.usualPathSource.location" coords="selectedAlert.usualPathSource.coordinate">
-            </ui-gmap-marker>
-            <ui-gmap-marker idKey="selectedAlert.usualPathDest.location" coords="selectedAlert.usualPathDest.coordinate">
-            </ui-gmap-marker>
-          </ui-gmap-google-map>
+          <ui-gmap-google-map center='excepMap.center' zoom='excepMap.zoom' control="excepMap.control"></ui-gmap-google-map>
         </div>
       </div>
 
