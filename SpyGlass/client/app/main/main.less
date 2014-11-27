@@ -1,4 +1,6 @@
-@height: 500px;
+@smallHeight: 200px;
+@mediumHeight: 300px;
+@largeHeight: 500px;
 @smallMap: 250px;
 @mediumMap: 300px;
 @largeMap: 400px;
@@ -42,15 +44,17 @@
 }
 .angular-google-map-container
 {
-  height: @height;
   @media screen{
     width: @smallMap;
+    height: @smallHeight;
     @media (min-width: 900px)
     {
+      height: @mediumHeight;
       width:@mediumMap;
     }
     @media (min-width: 1025px)
     {
+      height: @largeHeight;
       width:@largeMap;
     }
   }
