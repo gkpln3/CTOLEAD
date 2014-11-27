@@ -1,9 +1,9 @@
 <div md-layout="row">
   <md-content md-layout="row" flex offset="30">
+    <button type="button" class="btn btn-primary" ng-click="searchLocation()">חיפוש</button>
+    <input type="date" ng-model="maxDate" class="form-control" style="width:auto"/><label>עד</label>
+    <input id="m" type="date" ng-model="minDate" class="form-control" style="width:auto"/><label>מ</label>
     <select class="form-control" ng-model="location" ng-options="camera.location for camera in cameras"></select>
-    <input type="date" ng-model="minDate" class="form-control" style="width:auto"/><span>-</span>
-    <input type="date" ng-model="maxDate" class="form-control" style="width:auto"/>
-    <button type="button" class="btn btn-primary" ng-click="searchLocation()">Search</button>
   </md-content>
   <md-text-float flex offset="40" label="סינון" ng-model="field"></md-text-float>
   <div layout="column" style="margin-top:20px;" class="table-responsive">

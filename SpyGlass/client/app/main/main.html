@@ -18,25 +18,19 @@
 
       <div id="detail-content" role="tabpanel" aria-labelledby="detailTab" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
         <md-content class="md-padding" style="height: 600px; text-align:right">
-          <md-toolbar class="md-flex" md-theme="red" style="text-align: right">
-            <div style="margin:20px">
-              <span>תיאור המקרה</span>
-            </div>
-          </md-toolbar>
           <div class="bs-callout bs-callout-danger">
-          <h3>המערכת זיהתה חריגה בתאריך {{ selectedAlert.date | date : 'dd/MM/yyyy' }} במסלול הנסיעה של {{ selectedAlert.name }}</h3>
-          <h3>{{ selectedAlert.name }} נסע ברכב מספר {{ selectedAlert.carId }} מ{{ selectedAlert.alertPathSource.location }} ל{{ selectedAlert.alertPathDest.location }} כאשר בדרך כלל הוא נוסע מ{{ selectedAlert.usualPathSource.location }} ל{{ selectedAlert.usualPathDest.location }}</h3>
-          <h3 style="color:red">לפי ניתוח המערכת ישנה סבירות של  {{ 100 - selectedAlert.percentage }}% שמדובר בפעילות חבלנית עוינת</h3>
+            <h4>תיאור המקרה</h4>
+            <p>המערכת זיהתה חריגה בתאריך {{ selectedAlert.date | date : 'dd/MM/yyyy' }} במסלול הנסיעה של {{ selectedAlert.name }}</p>
+            <p>{{ selectedAlert.name }} נסע ברכב מספר {{ selectedAlert.carId }} מ{{ selectedAlert.alertPathSource.location }} ל{{ selectedAlert.alertPathDest.location }} כאשר בדרך כלל הוא נוסע מ{{ selectedAlert.usualPathSource.location }} ל{{ selectedAlert.usualPathDest.location }}</p>
+            <p style="color:red">לפי ניתוח המערכת ישנה סבירות של  {{ 100 - selectedAlert.percentage }}% שמדובר בפעילות חבלנית עוינת</p>
           </div>
-          <md-toolbar class="md-flex" md-theme="purple" style="text-align: right">
-            <div style="margin:20px">
-              <span>פרופיל חשוד</span>
-            </div>
-          </md-toolbar>
-          <img ng-src="{{selectedAlert.picture}}" class="face" alt="{{selectedAlert.name}}">
-          <h1>שם החשוד: {{ selectedAlert.name }} </h1>
-          <h2>מקושר ל:  {{ selectedAlert.associated }} </h2>
-          <h3>{{ selectedAlert.description }}</h3>
+          <div class="bs-callout bs-callout-info">
+            <h4>פרופיל חשוד</h4>
+            <img ng-src="{{selectedAlert.picture}}" class="face" alt="{{selectedAlert.name}}">
+            <p>שם החשוד: {{ selectedAlert.name }} </p>
+            <p>מקושר ל:  {{ selectedAlert.associated }} </p>
+            <p>{{ selectedAlert.description }}</p>
+          </div>
         </md-content>
       </div>
     </div ng-switch>
