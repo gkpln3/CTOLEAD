@@ -16,7 +16,8 @@ angular.module('spyGlassApp')
       // Clear the map
       usualDisplay.setDirections({routes:[]});
       excepDisplay.setDirections({routes:[]});
-      $scope.selectedIndex = 0;
+      $scope.mapActive = true;
+      $scope.detailsActive = false;
     };
 
     $scope.pushAlert = function(alert) {
@@ -28,16 +29,6 @@ angular.module('spyGlassApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
-
-    $scope.next = function() {
-      $scope.selectedIndex = Math.min($scope.selectedIndex + 1, 1) ;
-    };
-
-    $scope.previous = function() {
-      $scope.selectedIndex = Math.max($scope.selectedIndex - 1, 0);
-    };
-
-    $scope.selectedIndex = 0;
 
     $scope.selectAlert= function(alert)
     {

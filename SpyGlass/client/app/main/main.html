@@ -1,55 +1,51 @@
 <div layout="column" md-theme="indigo">
   <div flex>
-    <md-tabs selected="selectedIndex">
-      <md-tab id="mapTab" aria-controls="map-content" label="מפה"> </md-tab>
-      <md-tab id="detailTab" aria-controls="detail-content" label="פרטים" ng-disabled="!selectedAlert"> </md-tab>
-    </md-tabs>
-    <div ng-switch on="selectedIndex" class="tabpanel-container">
-      <div id="map-content" role="tabpanel" aria-labelledby="mapTab" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
-        <div class="mapDiv">
-          <h3>נתיב אופייני</h3>
-          <ui-gmap-google-map center='usualMap.center' zoom='usualMap.zoom' control="usualMap.control"></ui-gmap-google-map>
-        </div>
-        <div class="mapDiv">
-          <h3>נתיב חשוד</h3>
-          <ui-gmap-google-map center='excepMap.center' zoom='excepMap.zoom' control="excepMap.control"></ui-gmap-google-map>
-        </div>
-      </div>
-
-      <div id="detail-content" role="tabpanel" aria-labelledby="detailTab" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
-        <md-content class="md-padding" style="height: 600px; text-align:right">
-          <div class="bs-callout bs-callout-danger">
-            <h4>תיאור המקרה</h4>
-            <p>המערכת זיהתה חריגה בתאריך {{ selectedAlert.date | date : 'dd/MM/yyyy' }} במסלול הנסיעה של {{ selectedAlert.name }}</p>
-            <p>{{ selectedAlert.name }} נסע ברכב מספר {{ selectedAlert.carId }} מ{{ selectedAlert.alertPathSource.location }} ל{{ selectedAlert.alertPathDest.location }} כאשר בדרך כלל הוא נוסע מ{{ selectedAlert.usualPathSource.location }} ל{{ selectedAlert.usualPathDest.location }}</p>
-            <p style="color:red">לפי ניתוח המערכת ישנה סבירות של  {{ 100 - selectedAlert.percentage }}% שמדובר בפעילות חבלנית עוינת</p>
+    <tabset justified="true">
+      <tab active="mapActive" heading="מפה">
+        <div id="map-content" role="tabpanel" aria-labelledby="mapTab">
+          <div class="mapDiv">
+            <h3>נתיב אופייני</h3>
+            <ui-gmap-google-map center='usualMap.center' zoom='usualMap.zoom' control="usualMap.control"></ui-gmap-google-map>
           </div>
-          <div class="bs-callout bs-callout-info">
-            <h4>פרופיל חשוד</h4>
-            <img ng-src="{{selectedAlert.picture}}" class="face" alt="{{selectedAlert.name}}">
-            <p>שם החשוד: {{ selectedAlert.name }} </p>
-            <p>מקושר ל:  {{ selectedAlert.associated }} </p>
-            <p>{{ selectedAlert.description }}</p>
+          <div class="mapDiv">
+            <h3>נתיב חשוד</h3>
+            <ui-gmap-google-map center='excepMap.center' zoom='excepMap.zoom' control="excepMap.control"></ui-gmap-google-map>
           </div>
-        </md-content>
-      </div>
-    </div ng-switch>
+        </div>
+      </tab>
+      <tab active="detailsActive" disabled="!selectedAlert" heading="פרטים">
+        <div id="detail-content" role="tabpanel" aria-labelledby="detailTab">
+          <md-content class="md-padding" style="height: 600px; text-align:right">
+            <div class="bs-callout bs-callout-danger">
+              <h4>תיאור המקרה</h4>
+              <p>המערכת זיהתה חריגה בתאריך {{ selectedAlert.date | date : 'dd/MM/yyyy' }} במסלול הנסיעה של {{ selectedAlert.name }}</p>
+              <p>{{ selectedAlert.name }} נסע ברכב מספר {{ selectedAlert.carId }} מ{{ selectedAlert.alertPathSource.location }} ל{{ selectedAlert.alertPathDest.location }} כאשר בדרך כלל הוא נוסע מ{{ selectedAlert.usualPathSource.location }} ל{{ selectedAlert.usualPathDest.location }}</p>
+              <p style="color:red">לפי ניתוח המערכת ישנה סבירות של  {{ 100 - selectedAlert.percentage }}% שמדובר בפעילות חבלנית עוינת</p>
+            </div>
+            <div class="bs-callout bs-callout-info">
+              <h4>פרופיל חשוד</h4>
+              <img ng-src="{{selectedAlert.picture}}" class="face" alt="{{selectedAlert.name}}">
+              <p>שם החשוד: {{ selectedAlert.name }} </p>
+              <p>מקושר ל:  {{ selectedAlert.associated }} </p>
+              <p>{{ selectedAlert.description }}</p>
+             </div>
+          </md-content>
+        </div>
+      </tab>
+    </tabset>
   </div>
   <div flex="25">
-    <div>
-    <md-toolbar md-theme="red">
-      <h3 class="md-toolbar-tools">
-        <span flex>התראות</span>
-      </h3>
-    </md-toolbar>
+    <div style="text-align: center; background-color: #e84e40; height:30px; vertical-align: middle; border-radius: 3px">
+      <h2>התרעות</h2>
     </div>
-    <div id="alerts">
+    <div id="alerts" class="scroll">
         <md-button ng-repeat="alert in alerts" md-swipe-left="deleteAlert(alert)" class="md-whiteframe-z1" aria-label="alert" ng-click="selectAlert(alert)" layout ng-hide="hide">
           <div class="md-tile-content">
             <div layout="column">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" ng-show="selectedAlert._id == alert._id"></span>
               <div flex>
                 <div flex>
-                  <h1>{{alert.carId}}</h3>
+                  <h2>{{alert.carId}}</h2>
                 </div>
                 <div flex>
                   <h3>
