@@ -4,18 +4,19 @@ im = name;
 
 % Get only hour section from the image
 im = im(1:7,end-183:end-105,:);
+t = graythresh(im);
 
-im = im2bw(im);
+im = im2bw(im,t);
 
 % Array of digit locations
 digits = [
     1, 7;
-    8,14;
-    16,22;
+    9,15;
+    17,23;
     25,31;
     40,46;
-    48,54;
-    64,70;
+    49,55;
+    65,71;
     73,79
     ];
 

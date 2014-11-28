@@ -52,7 +52,7 @@ for idxRatio=1:length(s)
         if idxRatio > 1
             maxSumProperties = sumPropertiesFound;
         end
-        
+        foundaxisratio = abs(axisratio - s(idxRatio).MajorAxisLength/s(idxRatio).MinorAxisLength);
         foundRatio = abs(licenseRatio-(s(idxRatio).BoundingBox(3)/s(idxRatio).BoundingBox(4)));
         foundArea = abs(licenseArea - (s(idxRatio).Area));
         foundColor = abs(licenseColor(1)-colorArray(1))+abs(licenseColor(2)-colorArray(2))+abs(licenseColor(3)-colorArray(3));

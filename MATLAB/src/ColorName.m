@@ -4,7 +4,7 @@ function foundColorName = ColorName(checkColors)
 %colorMat = readtable('colortable.csv','Delimiter','@');
 %colorMat = table2cell(colorMat);
 colorMat = {...
-'Blue',  '153.0014 100.2472 125.8768';
+%'Blue',  '153.0014 100.2472 125.8768';
 'Black', '143.8997 35.5542 53.8000';
 'White', '134.8410 41.4204 212.967'...
 };

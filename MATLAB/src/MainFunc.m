@@ -10,9 +10,20 @@ imgDate = [imgDate(end-1:end) '-' imgDate(end-3:end-2) '-' imgDate(1:4)];
 [imgHour] = GetHour(bigImage);
 imgHour = [imgHour(1:2) ':' imgHour(3:4) ':' imgHour(5:6)];
 MLplatenum = mat2str(MLplatenum);
+dateAll = num2str(fix(clock));
+dateAll = strsplit(dateAll);
+
+for i=2:length(dateAll)
+    if length(char(dateAll(i))) < 2
+        dateAll(i) = strcat('0', dateAll(i));
+    end
+end
+
+dateJson = mat2str(cell2mat([dateAll(1) '-' dateAll(2) '-' dateAll(3)]));
+timeJson = mat2str(cell2mat([dateAll(4) ':' dateAll(5) ':' dateAll(6)]));
 dataJson = {['{"carId": "', MLplatenum ...
-    '", "color": "', vehicleColorFound, '", "camId": 1, "date": "', ...
-    imgDate, 'T', imgHour, '"}']};
+    '", "color": "', vehicleColorFound, '", "camId": 8, "date": "', ...
+    dateJson, 'T', timeJson, '"}']};
 
 dataJson = char(dataJson);
 dataJson = strrep(dataJson, char(39), '');
